@@ -20,11 +20,21 @@ class Board
   def piece_type(pos)
     row, col = pos
     if row == 1 || row == 6
-      Pawn.new
+      Pawn.new(pos, self)
     elsif row >= 2 && row <= 5
-      NullPiece.new
+      NullPiece.new(pos, self)
     else
-      NotPawn.new
+      if col == 0 || col == 7
+        Rook.new(pos, self)
+      elsif col == 1 || col == 6
+        Knight.new(pos, self)
+      elsif col == 2 || col == 5
+        Bishop.new(pos, self)
+      elsif col == 3
+        King.new(pos, self)
+      elsif col == 4
+        Queen.new(pos, self)
+      end
     end
   end
 
@@ -60,7 +70,7 @@ class Board
       false
     end
   end
-  
+
 end
 
 # board = Board.new
